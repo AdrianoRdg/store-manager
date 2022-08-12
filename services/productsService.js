@@ -13,4 +13,9 @@ async function getProductById(id) {
   return { code: 200, data };
 }
 
-module.exports = { getProducts, getProductById };
+async function addProduct(product) {
+  const data = await productModel.insertProduct(product);
+  return { code: 201, data };
+}
+
+module.exports = { getProducts, getProductById, addProduct };

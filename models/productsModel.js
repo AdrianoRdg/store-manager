@@ -14,4 +14,11 @@ async function getOneById(id) {
   return product;
 }
 
-module.exports = { getAll, getOneById };
+async function insertProduct(product) {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO StoreManager.products (name) VALUES (?)', [product],
+  );
+  return { id: insertId, name: product };
+}
+
+module.exports = { getAll, getOneById, insertProduct };
