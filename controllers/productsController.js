@@ -3,7 +3,7 @@ const productsService = require('../services/productsService');
 async function getProducts(_req, res) {
   const response = await productsService.getProducts();
   const { code, data } = response;
-  res.status(code).json(data);
+  return res.status(code).json(data);
 }
 
 async function getProductById(req, res) {
@@ -13,7 +13,7 @@ async function getProductById(req, res) {
 
   if (message) return res.status(code).json({ message });
 
-  res.status(code).json(data);
+  return res.status(code).json(data);
 }
 
 module.exports = { getProducts, getProductById };
