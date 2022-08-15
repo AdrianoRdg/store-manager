@@ -42,6 +42,7 @@ describe('Tesa camada de controllers', () => {
       await productsController.getProductById(req, res);
 
       expect(res.status.calledWith(200)).to.be.equal(true);
+      expect(res.json.calledWith({})).to.be.equal(true);
     });
   });
 });
