@@ -21,4 +21,15 @@ async function insertProduct(product) {
   return { id: insertId, name: product };
 }
 
-module.exports = { getAll, getOneById, insertProduct };
+async function updateProduct(name, id) {
+  await connection.execute(
+    `UPDATE StoreManager.products  
+    SET name=?
+    WHERE id=?`,
+    [name, id],
+  );
+  
+  return { id, name };
+}
+
+module.exports = { getAll, getOneById, insertProduct, updateProduct };

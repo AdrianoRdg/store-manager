@@ -18,4 +18,13 @@ async function addProduct(product) {
   return { code: 201, data };
 }
 
-module.exports = { getProducts, getProductById, addProduct };
+async function updateProduct(product, id) {
+  const { code, message } = await getProductById(id);
+
+  if (message) return { code, message };
+
+  const data = await productModel.updateProduct(product, id);
+  return { code: 200, data };
+}
+
+module.exports = { getProducts, getProductById, addProduct, updateProduct };

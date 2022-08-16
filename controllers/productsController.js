@@ -23,4 +23,15 @@ async function addProduct(req, res) {
   res.status(code).json(data);
 }
 
-module.exports = { getProducts, getProductById, addProduct };
+async function updateProduct(req, res) {
+  const { id } = req.params;
+  const { name } = req.body;
+  const response = await productsService.updateProduct(name, id);
+  const { code, data, message } = response;
+  
+  if (message) return res.status(code).json({ message });
+
+  return res.status(code).json(data);
+}
+
+module.exports = { getProducts, getProductById, addProduct, updateProduct };
