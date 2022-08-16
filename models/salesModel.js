@@ -34,6 +34,7 @@ async function getSalesById(id) {
     WHERE s.id = ?`,
     [id],
   );
+  
   return sales;
 }
 

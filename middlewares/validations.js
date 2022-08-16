@@ -1,6 +1,6 @@
-const schema = require('./productsSchema');
+const schema = require('./schemas');
 
-function productValidate(req, res, next) {
+function nameValidate(req, res, next) {
   const { error } = schema.productSchema.validate(req.body);
   if (error) {
     const [code, message] = error.message.split('|');
@@ -10,4 +10,4 @@ function productValidate(req, res, next) {
   next();
 }
 
-module.exports = { productValidate };
+module.exports = { nameValidate };

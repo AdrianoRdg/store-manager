@@ -26,12 +26,18 @@ async function addProduct(req, res) {
 async function updateProduct(req, res) {
   const { id } = req.params;
   const { name } = req.body;
-  const response = await productsService.updateProduct(name, id);
-  const { code, data, message } = response;
   
-  if (message) return res.status(code).json({ message });
+  try {
+    const response = await productsService.updateProduct(name, id);
+    const { code, data, message } = response;
 
-  return res.status(code).json(data);
+    if (message) return res.status(code).json({ message });
+
+    return res.status(code).json(data);
+  } catch (error) { 
+    console.log('camada controller', error);
+    return res.status(500).send(error);
+  }
 }
 
 module.exports = { getProducts, getProductById, addProduct, updateProduct };
