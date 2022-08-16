@@ -6,6 +6,7 @@ function productValidate(req, res, next) {
     const [code, message] = error.message.split('|');
     return res.status(Number(code)).json({ message });
   }
+  
   next();
 }
 
