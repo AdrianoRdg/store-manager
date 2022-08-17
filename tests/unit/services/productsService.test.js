@@ -14,10 +14,6 @@ describe('Testes da camada de services', () => {
       expect(response).to.be.a('object');
       expect(response.data).to.be.an('array');
     });
-
-    afterEach(() => {
-      sinon.restore();
-    });
   });
 
   describe('Testa a função getProductById', () => {
@@ -37,6 +33,21 @@ describe('Testes da camada de services', () => {
 
     const response = await productsService.getProductById(id);
     expect(response).to.have.keys('code', 'message');
+  });
+
+  describe('Testes da função updateProduct', () => {
+    it('verifica se a função atualiza informações e retorna um objeto com as novas informações', async () => {
+      const expectResponse = { name: '', id: '' };
+      sinon.stub(productsModel, 'updateProduct').resolves(expectResponse);
+      
+      const id = 1;
+      const name = 'product';
+
+      const response = await productsService.updateProduct(name, id);
+      
+      expect(response).to.be.a('object');
+      expect(response).to.have.keys('code', 'data');
+    })
   });
 
   afterEach(() => {

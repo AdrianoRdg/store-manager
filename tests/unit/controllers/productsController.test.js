@@ -21,10 +21,6 @@ describe('Tesa camada de controllers', () => {
 
       expect(res.status.calledWith(200)).to.be.true;
     });
-
-    afterEach(() => {
-      sinon.restore();
-    })
   });
 
   describe('Testa a função getProductById', () => {
@@ -44,5 +40,29 @@ describe('Tesa camada de controllers', () => {
       expect(res.status.calledWith(200)).to.be.equal(true);
       expect(res.json.calledWith({})).to.be.equal(true);
     });
+  });
+
+  describe('Testa a função updateProduct', () => {
+    it('Verifica se a função retorna um objeto com codigo e nome e id do produto alterado', async () => {
+      const req = {};
+      const res = {};
+      req.params = { id: 1 };
+      req.body = { name: 'product' };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      const stubResponse = { code: 200, data: { name: 'product', id: 1 } };
+      sinon.stub(productsService, 'updateProduct').resolves(stubResponse);
+
+      await productsController.updateProduct(req, res);
+      
+      expect(res.status.calledWith(200)).to.be.equal(true);
+      expect(res.json.calledWith(stubResponse.data)).to.be.equal(true);
+    });
+  });
+
+  afterEach(() => {
+    sinon.restore();
   });
 });

@@ -20,9 +20,22 @@ describe('Testes da camada model', () => {
       expect(response).to.be.an('object');
       expect(response).to.have.property('id').to.eq(expectResponse.id);
     });
+  });
 
-    afterEach(() => {
-      sinon.restore();
+  describe('Testes da função updateProduct', () => {
+    it('Verifica se a função retorna um objeto com name e id', async () => {
+      sinon.stub(connection, 'execute').resolves([]);
+
+      const id = 1;
+      const name = 'product';
+      const response = await productModel.updateProduct(name, id);
+
+      expect(response).to.be.an('object');
+      expect(response).to.have.keys('name', 'id');
     });
+  });
+
+  afterEach(() => {
+    sinon.restore();
   });
 });
