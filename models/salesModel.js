@@ -1,21 +1,25 @@
 const connection = require('./connection');
 
-// async function addSale(productId, quantity) {
-//   const [{ insertId }] = await connection.execute(`
-//   INSERT INTO StoreManager.sales(date) 
-//   VALUES(NOW())`);
+async function addSales(data) {
+  const [{ insertId }] = await connection.execute(`
+  INSERT INTO StoreManager.sales(date) 
+  VALUES(NOW())`);
+  
+  const adingData = await data.map(async ({ productId, quantity }) => {
+    await connection.execute(` 
+    INSERT INTO StoreManager.sales_products(sale_id, product_id, quantity) 
+    VALUES(?, ?, ?)
+    `, [insertId, productId, quantity]);
+    
+    return { productId, quantity };
+  });
 
-//   const sale1 = await connection.execute(` 
-//   INSERT INTO StoreManager.sales_products(sale_id, product_id, quantity) 
-//   VALUES(LAST_INSERT_ID(), ?, ?)
-//   `, [productId, quantity]);
+  const dadosResult = await Promise.all(adingData);
 
-//   console.log(insertId);
+  const salesAdded = await { id: insertId, itemsSold: [...dadosResult] };
 
-//   const response = { ...insertId, ...sale1 };
-
-//   return response;
-// }
+  return salesAdded;
+}
 
 async function getAllSales() {
   const [sales] = await connection.execute(
@@ -38,4 +42,4 @@ async function getSalesById(id) {
   return sales;
 }
 
-module.exports = { getAllSales, getSalesById };
+module.exports = { getAllSales, getSalesById, addSales };

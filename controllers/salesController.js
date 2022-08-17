@@ -14,4 +14,14 @@ async function getSalesById(req, res) {
   return res.status(200).json(data);
 }
 
-module.exports = { getAllSales, getSalesById };
+async function addSales(req, res) {
+  const dados = req.body;
+ 
+  const { code, data, message } = await salesService.addSales(dados);
+
+  if (message) return res.status(code).json({ message });
+
+  return res.status(code).json(data);
+}
+
+module.exports = { getAllSales, getSalesById, addSales };

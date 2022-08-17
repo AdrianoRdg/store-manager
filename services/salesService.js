@@ -27,4 +27,24 @@ async function getSalesById(id) {
   return { code: 200, data: convert };
 }
 
-module.exports = { getAllSales, getSalesById };
+const prod = require('./productsService');
+
+async function addSales(bodyData) {
+  const verifyProducts = bodyData.map(async (product) => {
+    const { code, message } = await prod.getProductById(product.productId);
+    if (message) return { code, message };
+    return product;
+  });
+
+  const verifiedProducts = await Promise.all(verifyProducts);
+ 
+  const message = verifiedProducts.find((i) => i.message);
+  
+  if (message) return message;
+
+  const data = await salesModel.addSales(verifiedProducts);
+
+  return { code: 201, data };
+}
+
+module.exports = { getAllSales, getSalesById, addSales };

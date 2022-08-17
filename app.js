@@ -19,11 +19,7 @@ app.get('/products/:id', productsController.getProductById);
 
 app.post('/products', validate.nameValidate, productsController.addProduct);
 
-// app.post('/sales', async (req, res) => {
-//   const { productId, quantity } = req.body;
-//   const as = await add.addSale(productId, quantity);
-//   return res.status(201).json(as);
-// });
+app.post('/sales', validate.addProductValidate, salesController.addSales);
 
 app.get('/sales', salesController.getAllSales);
 app.get('/sales/:id', salesController.getSalesById);

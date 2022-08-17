@@ -7,4 +7,16 @@ const productSchema = Joi.object({
   }),
 });
 
-module.exports = { productSchema };
+const addProductSchema = Joi.object({
+  productId: Joi.number().integer().required()
+    .messages({
+      'any.required': '400|"productId" is required',
+  }),
+  quantity: Joi.number().integer().required().min(1)
+    .messages({
+      'any.required': '400|"quantity" is required',
+      'number.min': '422|"quantity" must be greater than or equal to 1',
+  }),
+});
+
+module.exports = { productSchema, addProductSchema };
