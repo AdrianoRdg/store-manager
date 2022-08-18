@@ -42,4 +42,10 @@ async function getSalesById(id) {
   return sales;
 }
 
-module.exports = { getAllSales, getSalesById, addSales };
+async function deleteSale(id) {
+  await connection.execute(
+    'DELETE FROM StoreManager.sales WHERE id = ?', [id],
+  );
+}
+
+module.exports = { getAllSales, getSalesById, addSales, deleteSale };

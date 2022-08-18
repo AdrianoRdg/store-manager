@@ -47,4 +47,13 @@ async function addSales(bodyData) {
   return { code: 201, data };
 }
 
-module.exports = { getAllSales, getSalesById, addSales };
+async function deleteSale(id) {
+  const { code, message } = await getSalesById(id);
+  
+  if (message) return { code, message };
+
+  await salesModel.deleteSale(id);
+  return { code: 204 };
+}
+
+module.exports = { getAllSales, getSalesById, addSales, deleteSale };

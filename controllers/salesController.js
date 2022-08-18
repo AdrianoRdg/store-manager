@@ -24,4 +24,14 @@ async function addSales(req, res) {
   return res.status(code).json(data);
 }
 
-module.exports = { getAllSales, getSalesById, addSales };
+async function deleteSale(req, res) {
+  const { id } = req.params;
+  console.log('oi');
+  const { code, message } = await salesService.deleteSale(id);
+  
+  if (message) return res.status(code).json({ message });
+
+  return res.status(code).send();
+}
+
+module.exports = { getAllSales, getSalesById, addSales, deleteSale };
