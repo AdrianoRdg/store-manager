@@ -14,17 +14,14 @@ const validate = require('./middlewares/validations');
 app.use(express.json());
 
 app.get('/products', productsController.getProducts);
-
-app.get('/products/:id', productsController.getProductById);
-
 app.post('/products', validate.nameValidate, productsController.addProduct);
+app.get('/products/:id', productsController.getProductById);
+app.put('/products/:id', validate.nameValidate, productsController.updateProduct);
+app.delete('/products/:id', productsController.deleteProduct);
 
 app.post('/sales', validate.addProductValidate, salesController.addSales);
-
 app.get('/sales', salesController.getAllSales);
 app.get('/sales/:id', salesController.getSalesById);
-
-app.put('/products/:id', validate.nameValidate, productsController.updateProduct);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima

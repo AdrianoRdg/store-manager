@@ -28,4 +28,14 @@ async function updateProduct(product, id) {
   return { code: 200, data };
 }
 
-module.exports = { getProducts, getProductById, addProduct, updateProduct };
+async function deleteProduct(id) {
+  const { code, message } = await getProductById(id);
+  
+  if (message) return { code, message };
+
+  await productModel.deleteProduct(id);
+
+  return { code: 204 };
+}
+
+module.exports = { getProducts, getProductById, addProduct, updateProduct, deleteProduct };

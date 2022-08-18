@@ -32,4 +32,10 @@ async function updateProduct(name, id) {
   return { id, name };
 }
 
-module.exports = { getAll, getOneById, insertProduct, updateProduct };
+async function deleteProduct(id) {
+  await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?', [id],
+  );
+}
+
+module.exports = { getAll, getOneById, insertProduct, updateProduct, deleteProduct };
