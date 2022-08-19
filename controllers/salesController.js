@@ -15,9 +15,9 @@ async function getSalesById(req, res) {
 }
 
 async function addSales(req, res) {
-  const dados = req.body;
+  const bodyData = req.body;
  
-  const { code, data, message } = await salesService.addSales(dados);
+  const { code, data, message } = await salesService.addSales(bodyData);
 
   if (message) return res.status(code).json({ message });
 
@@ -26,7 +26,7 @@ async function addSales(req, res) {
 
 async function deleteSale(req, res) {
   const { id } = req.params;
-  console.log('oi');
+  
   const { code, message } = await salesService.deleteSale(id);
   
   if (message) return res.status(code).json({ message });
@@ -34,4 +34,15 @@ async function deleteSale(req, res) {
   return res.status(code).send();
 }
 
-module.exports = { getAllSales, getSalesById, addSales, deleteSale };
+async function updateSale(req, res) {
+  const bodyData = req.body;
+  const { id } = req.params;
+
+  const { code, data, message } = await salesService.updateSale(id, bodyData);
+  
+  if (message) return res.status(404).json({ message });
+
+  return res.status(code).json(data);
+}
+
+module.exports = { getAllSales, getSalesById, addSales, deleteSale, updateSale };

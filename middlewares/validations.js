@@ -10,7 +10,7 @@ function nameValidate(req, res, next) {
   next();
 }
 
-function addProductValidate(req, res, next) {
+function productsValidate(req, res, next) {
   const data = req.body;
   
   const verifyValidation = data.map((a) => {
@@ -32,4 +32,4 @@ function addProductValidate(req, res, next) {
   next();
 }
 
-module.exports = { nameValidate, addProductValidate };
+module.exports = { nameValidate, productsValidate };

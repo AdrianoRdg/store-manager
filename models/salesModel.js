@@ -48,4 +48,22 @@ async function deleteSale(id) {
   );
 }
 
-module.exports = { getAllSales, getSalesById, addSales, deleteSale };
+async function updateSale(id, sales) {
+  const updatingProducts = await sales.map(async ({ productId, quantity }) => {
+    await connection.execute(`
+    UPDATE StoreManager.sales_products 
+    SET quantity=?
+    WHERE sale_id=? AND product_id=?
+    `, [quantity, id, productId]);
+    
+    return { productId, quantity };
+  });
+
+  const dadosResult = await Promise.all(updatingProducts);
+
+  const salesUpdated = await { saleId: Number(id), itemsUpdated: [...dadosResult] };
+
+  return salesUpdated;
+}
+
+module.exports = { getAllSales, getSalesById, addSales, deleteSale, updateSale };
