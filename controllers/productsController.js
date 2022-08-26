@@ -1,26 +1,45 @@
 const productsService = require('../services/productsService');
 
 async function getProducts(_req, res) {
-  const response = await productsService.getProducts();
-  const { code, data } = response;
-  return res.status(code).json(data);
+  try {
+    const response = await productsService.getProducts();
+    const { code, data } = response;
+
+    return res.status(code).json(data);
+  } catch (error) {
+    console.log('camada controller', error.message);
+    return res.status(500).json({ message: 'Erro interno' });
+  }
 }
 
 async function getProductById(req, res) {
   const { id } = req.params;
-  const response = await productsService.getProductById(id);
-  const { code, data, message } = response;
 
-  if (message) return res.status(code).json({ message });
+  try {
+    const response = await productsService.getProductById(id);
+    const { code, data, message } = response;
 
-  return res.status(code).json(data);
+    if (message) return res.status(code).json({ message });
+
+    return res.status(code).json(data);
+  } catch (error) {
+    console.log('camada controller', error.message);
+    return res.status(500).json({ message: 'Erro interno' });
+  }
 }
 
 async function addProduct(req, res) {
   const { name } = req.body;
-  const product = await productsService.addProduct(name);
-  const { code, data } = product;
-  res.status(code).json(data);
+
+  try {
+    const product = await productsService.addProduct(name);
+    const { code, data } = product;
+
+    return res.status(code).json(data);
+  } catch (error) {
+    console.log('camada controller', error.message);
+    return res.status(500).json({ message: 'Erro interno' });
+  }
 }
 
 async function updateProduct(req, res) {
@@ -35,8 +54,8 @@ async function updateProduct(req, res) {
 
     return res.status(code).json(data);
   } catch (error) { 
-    console.log('camada controller', error);
-    return res.status(500).send(error);
+    console.log('camada controller', error.message);
+    return res.status(500).json({ message: 'Erro interno' });
   }
 }
 
@@ -47,7 +66,27 @@ async function deleteProduct(req, res) {
   
   if (message) return res.status(code).json({ message });
 
-  return res.status(code).send();
+  return res.status(code).json();
 }
 
-module.exports = { getProducts, getProductById, addProduct, updateProduct, deleteProduct };
+async function getProductByQuery(req, res) {
+  const queryName = req.query.q;
+ 
+  if (!queryName) {
+    const { code, data } = await productsService.getProducts();
+    return res.status(code).json(data);
+  }
+    
+  const { code, data } = await productsService.getProductByQuery(queryName);
+
+  return res.status(code).json(data);
+}
+
+module.exports = {
+  getProducts,
+  getProductById,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+  getProductByQuery,
+};

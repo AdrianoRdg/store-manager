@@ -38,4 +38,19 @@ async function deleteProduct(id) {
   );
 }
 
-module.exports = { getAll, getOneById, insertProduct, updateProduct, deleteProduct };
+async function getProductByQuery(name) {
+  const [products] = await connection.execute(
+    `SELECT * FROM StoreManager.products WHERE name LIKE '%${name}%'`,
+  );
+
+  return products;
+}
+
+module.exports = {
+  getAll,
+  getOneById,
+  insertProduct,
+  updateProduct,
+  deleteProduct,
+  getProductByQuery,
+};

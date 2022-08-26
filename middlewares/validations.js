@@ -11,10 +11,10 @@ function nameValidate(req, res, next) {
 }
 
 function productsValidate(req, res, next) {
-  const data = req.body;
+  const products = req.body;
   
-  const verifyValidation = data.map((a) => {
-    const { value, error } = schema.addProductSchema.validate(a);
+  const verifyValidation = products.map((index) => {
+    const { value, error } = schema.addProductSchema.validate(index);
     if (error) {
       const [code, message] = error.message.split('|');
       return { code, message };

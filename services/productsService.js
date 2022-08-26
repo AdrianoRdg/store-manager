@@ -38,4 +38,17 @@ async function deleteProduct(id) {
   return { code: 204 };
 }
 
-module.exports = { getProducts, getProductById, addProduct, updateProduct, deleteProduct };
+async function getProductByQuery(name) {
+  const data = await productModel.getProductByQuery(name);
+
+  return { code: 200, data };
+}
+
+module.exports = {
+  getProducts,
+  getProductById,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+  getProductByQuery,
+};

@@ -1,5 +1,4 @@
 const salesModel = require('../models/salesModel');
-const util = require('../utils/searchProducts');
 const serializes = require('../utils/serializes');
 
 async function getAllSales() {
@@ -21,11 +20,7 @@ async function getSalesById(id) {
 }
 
 async function addSales(bodyData) {
-  const verifiedProducts = await util.searchProducts(bodyData);
-
-  if (verifiedProducts.message) return verifiedProducts;
-
-  const data = await salesModel.addSales(verifiedProducts);
+  const data = await salesModel.addSales(bodyData);
 
   return { code: 201, data };
 }
@@ -40,15 +35,11 @@ async function deleteSale(id) {
 }
 
 async function updateSale(id, dataBody) {
-  const verifiedProducts = await util.searchProducts(dataBody);
-
-  if (verifiedProducts.message) return verifiedProducts;
-
   const { code, message } = await getSalesById(id);
 
   if (message) return { code, message };
 
-  const data = await salesModel.updateSale(id, verifiedProducts);
+  const data = await salesModel.updateSale(id, dataBody);
 
   return { code: 200, data };
 }
