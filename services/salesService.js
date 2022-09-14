@@ -20,28 +20,36 @@ async function getSalesById(id) {
 }
 
 async function addSales(bodyData) {
-  const data = await salesModel.addSales(bodyData);
+  const id = await salesModel.addSale();
+  
+  const data = await salesModel.addSaleProducts(id, bodyData);
 
   return { code: 201, data };
 }
 
 async function deleteSale(id) {
-  const { code, message } = await getSalesById(id);
+  // const { code, message } = await getSalesById(id);
   
-  if (message) return { code, message };
+  // if (message) return { code, message };
+  const data = await salesModel.getSalesById(id);
+
+  if (!data.length) return { code: 404, message: 'Sale not found' };
 
   await salesModel.deleteSale(id);
   return { code: 204 };
 }
 
-async function updateSale(id, dataBody) {
-  const { code, message } = await getSalesById(id);
+async function updateSales(id, dataBody) {
+  // const { code, message } = await getSalesById(id);
 
-  if (message) return { code, message };
+  // if (message) return { code, message };
+  const verify = await salesModel.getSalesById(id);
 
-  const data = await salesModel.updateSale(id, dataBody);
+  if (!verify.length) return { code: 404, message: 'Sale not found' };
+
+  const data = await salesModel.updateSales(id, dataBody);
 
   return { code: 200, data };
 }
 
-module.exports = { getAllSales, getSalesById, addSales, deleteSale, updateSale };
+module.exports = { getAllSales, getSalesById, addSales, deleteSale, updateSales };

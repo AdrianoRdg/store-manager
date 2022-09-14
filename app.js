@@ -1,16 +1,16 @@
 const express = require('express');
-
-const app = express();
-
-// não remova esse endpoint, é para o avaliador funcionar
-app.get('/', (_request, response) => {
-  response.send();
-});
-
 const productsController = require('./controllers/productsController');
 const salesController = require('./controllers/salesController');
 const validate = require('./middlewares/validations');
 const search = require('./middlewares/searchProducts');
+const errorMiddleware = require('./middlewares/errorMiddleware');
+require('express-async-errors');
+
+const app = express();
+
+app.get('/', (_request, response) => {
+  response.send();
+});
 
 app.use(express.json());
 
@@ -25,10 +25,12 @@ app.post('/sales', validate.productsValidate,
   search.verifyProductsExistence, salesController.addSales);
 
 app.put('/sales/:id', validate.productsValidate,
-  search.verifyProductsExistence, salesController.updateSale);
+  search.verifyProductsExistence, salesController.updateSales);
 
 app.get('/sales', salesController.getAllSales);
 app.get('/sales/:id', salesController.getSalesById);
 app.delete('/sales/:id', salesController.deleteSale);
+
+app.use(errorMiddleware);
 
 module.exports = app;

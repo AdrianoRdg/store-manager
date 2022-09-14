@@ -6,6 +6,10 @@ const connection = require('../../../models/connection');
 describe('Testes da camada model', () => {
   describe('Testa a resposta das funções da camada models', () => {
     it('A função getAll deve retornar todos os produtos da db', async () => {
+      const expectResponse = [{ id: 1, name: '' }, { id: 2, name: '' }]
+      
+      sinon.stub(connection, 'execute').resolves([expectResponse]);
+
       const response = await productModel.getAll();
       expect(response).to.be.an('array');
     });

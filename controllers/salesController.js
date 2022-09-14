@@ -2,6 +2,7 @@ const salesService = require('../services/salesService');
 
 async function getAllSales(_req, res) {
   const { code, data } = await salesService.getAllSales();
+  
   return res.status(code).json(data);
 }
 
@@ -15,13 +16,11 @@ async function getSalesById(req, res) {
 }
 
 async function addSales(req, res) {
-  const bodyData = req.body;
- 
-  const { code, data, message } = await salesService.addSales(bodyData);
+    const bodyData = req.body;
 
-  if (message) return res.status(code).json({ message });
+    const { code, data } = await salesService.addSales(bodyData);
 
-  return res.status(code).json(data);
+    return res.status(code).json(data);
 }
 
 async function deleteSale(req, res) {
@@ -31,18 +30,18 @@ async function deleteSale(req, res) {
   
   if (message) return res.status(code).json({ message });
 
-  return res.status(code).send();
+  return res.status(code).json();
 }
 
-async function updateSale(req, res) {
+async function updateSales(req, res) {
   const bodyData = req.body;
   const { id } = req.params;
 
-  const { code, data, message } = await salesService.updateSale(id, bodyData);
+  const { code, data, message } = await salesService.updateSales(id, bodyData);
   
   if (message) return res.status(404).json({ message });
 
   return res.status(code).json(data);
 }
 
-module.exports = { getAllSales, getSalesById, addSales, deleteSale, updateSale };
+module.exports = { getAllSales, getSalesById, addSales, deleteSale, updateSales };

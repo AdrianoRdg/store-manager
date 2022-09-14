@@ -12,7 +12,7 @@ function nameValidate(req, res, next) {
 
 function productsValidate(req, res, next) {
   const products = req.body;
-  
+
   const verifyValidation = products.map((index) => {
     const { value, error } = schema.addProductSchema.validate(index);
     if (error) {

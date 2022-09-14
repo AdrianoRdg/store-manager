@@ -19,9 +19,9 @@ async function addProduct(product) {
 }
 
 async function updateProduct(product, id) {
-  const { code, message } = await getProductById(id);
+  const verify = await productModel.getOneById(id);
 
-  if (message) return { code, message };
+  if (!verify) return { code: 404, message: 'Product not found' };
   
   const data = await productModel.updateProduct(product, id);
    
@@ -29,9 +29,9 @@ async function updateProduct(product, id) {
 }
 
 async function deleteProduct(id) {
-  const { code, message } = await getProductById(id);
-  
-  if (message) return { code, message };
+  const verify = await productModel.getOneById(id);
+
+  if (!verify) return { code: 404, message: 'Product not found' };
 
   await productModel.deleteProduct(id);
 
