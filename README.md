@@ -12,12 +12,14 @@ Projeto de uma API de controle de vendas de uma loja, nele temos as rotas de con
 
 ## Orientações
 
-- Clone o projeto
-    - `git clone git@github.com:AdrianoRdg/sotre-manager.git`.
+Clone o projeto
 
-Existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
+    git@github.com:AdrianoRdg/store-manager.git
 
-1. Docker
+Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
+
+1. Docker 
+
     Suba o container
     
     - `docker-compose up -d`
@@ -31,6 +33,7 @@ Existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
     - `npm install`  
     
 2. Localmente
+
     Instale as dependências
   
     - `npm install`
@@ -55,6 +58,7 @@ Após a configuração de variáveis de ambiente, temos os seguintes comandos
 
 - `npm start`    // Inicia o servidor  
     
+- `npm run test:mocha`   // Roda os testes de cobertura 
 
 ## Rotas da API
 
