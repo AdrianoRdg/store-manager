@@ -12,26 +12,26 @@ Projeto de uma API de controle de vendas de uma loja, nele temos as rotas de con
 
 ## Orientações
 
-Existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
-
 - Clone o projeto
     - `git clone git@github.com:AdrianoRdg/sotre-manager.git`.
 
-- Docker
-    1. Suba o container
+Existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
+
+1. Docker
+    Suba o container
     
     - `docker-compose up -d`
 
-    2. Abra o terminal do container
+    Abra o terminal do container
     
     - `docker exec -it store_manager bash`
     
-    2. Instale as dependências
+    Instale as dependências
     
     - `npm install`  
     
-- Localmente
-    1. Instale as dependências
+2. Localmente
+    Instale as dependências
   
     - `npm install`
 
