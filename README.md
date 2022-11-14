@@ -18,25 +18,33 @@ Clone o projeto
 
 Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
 
-1. Docker 
+<details open>
+    <summary>Rodando via Docker</summary>
+    <br>
+    
+1. Suba o container
 
-    Suba o container
-    
-    - `docker-compose up -d`
+    `docker-compose up -d`
 
-    Abra o terminal do container
-    
-    - `docker exec -it store_manager bash`
-    
-    Instale as dependências
-    
-    - `npm install`  
-    
-2. Localmente
+2. Abra o terminal do container
 
-    Instale as dependências
+    `docker exec -it store_manager bash`
+
+3. Instale as dependências
+
+    `npm install`  
+</details>
+
+<details open>
+    <summary>Rodando Localmente</summary>
+    <br>
+    
+1. Instale as dependências
+
+    `npm install`
   
-    - `npm install`
+</details>
+    
 
 ## Utilização de variáveis de ambiente
 Na raiz do projeto existe um arquivo chamado .env.exemple, renomeie-o para .env e configure as variáveis de amebiente
