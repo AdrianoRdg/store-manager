@@ -18,7 +18,7 @@ Clone o projeto
 
 Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
 
-<details open>
+<details close>
     <summary>Rodando via Docker</summary>
     <br>
     
@@ -35,7 +35,7 @@ Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e l
     `npm install`  
 </details>
 
-<details open>
+<details close>
     <summary>Rodando Localmente</summary>
     <br>
     
