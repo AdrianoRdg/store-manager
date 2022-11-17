@@ -12,11 +12,20 @@ Projeto de uma API de controle de vendas de uma loja, nele temos as rotas de con
 
 ## Orientações
 
-Clone o projeto
+### Pré-requisitos
+
+O projeto utiliza o node na versão 16 ou superior, e o banco de dados MySQL, porém pode ser executado via docker 
+
+
+### Clone o projeto
 
     git@github.com:AdrianoRdg/store-manager.git
+    
+### Entre na pasta 
+    cd store-manager
 
-Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
+
+Após o clone, existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
 
 <details close>
     <summary>Rodando via Docker</summary>
@@ -70,7 +79,7 @@ Após a configuração de variáveis de ambiente, temos os seguintes comandos
 
 ## Rotas da API
 
-Após iniciar o servidor, a API deve rodar em uma url parecida com a seguinte: 
+Após iniciar o servidor, a API deve rodar em uma url como a seguinte: 
 
 
     http://localhost:3000
