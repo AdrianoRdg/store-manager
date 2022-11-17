@@ -10,12 +10,11 @@ Projeto de uma API de controle de vendas de uma loja, nele temos as rotas de con
 - Chai
 - Mocka
 
+## Pré-requisitos
+
+O projeto utiliza o node na versão 16 ou superior, e o banco de dados MySQL, porém pode ser executado via docker
+
 ## Orientações
-
-### Pré-requisitos
-
-O projeto utiliza o node na versão 16 ou superior, e o banco de dados MySQL, porém pode ser executado via docker 
-
 
 ### Clone o projeto
 
