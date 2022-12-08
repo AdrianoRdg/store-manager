@@ -5,12 +5,12 @@ const search = require('../middlewares/searchProducts');
 
 const salesRouter = Router();
 
-salesRouter.get('/sales', salesController.getAllSales);
-salesRouter.get('/sales/:id', salesController.getSalesById);
-salesRouter.post('/sales', validate.productsValidate,
+salesRouter.get('/', salesController.getAllSales);
+salesRouter.get('/:id', salesController.getSalesById);
+salesRouter.post('/', validate.productsValidate,
   search.verifyProductsExistence, salesController.addSales);
-salesRouter.put('/sales/:id', validate.productsValidate,
+salesRouter.put('/:id', validate.productsValidate,
   search.verifyProductsExistence, salesController.updateSales);
-salesRouter.delete('/sales/:id', salesController.deleteSale);
+salesRouter.delete('/:id', salesController.deleteSale);
 
 module.exports = salesRouter;
