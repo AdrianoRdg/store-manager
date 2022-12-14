@@ -1,4 +1,3 @@
-// regras de negocio
 const productModel = require('../models/productsModel');
 
 async function getProducts() {
@@ -22,9 +21,9 @@ async function updateProduct(product, id) {
   const verify = await productModel.getOneById(id);
 
   if (!verify) return { code: 404, message: 'Product not found' };
-  
+
   const data = await productModel.updateProduct(product, id);
-   
+
   return { code: 200, data };
 }
 
